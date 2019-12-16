@@ -1,7 +1,8 @@
 import babel from 'rollup-plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-// import external from 'rollup-plugin-peer-deps-external'
+// import replace from 'rollup-plugin-replace';
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 // import json from 'rollup-plugin-json';
 
 const globals = {
@@ -48,15 +49,11 @@ export default {
   },
   external: Object.keys(globals),
   plugins: [
-    // external(),
+    peerDepsExternal(),
     resolve(),
-    // babel({
-    //   // presets: ['@babel/preset-react'],
-    //   runtimeHelpers: true,
-    //   exclude: 'node_modules/**'
-    // }),
     babel(babelOptions),
     commonjs(commonjsOptions),
+    // replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
     // json(),
   ]
 };
