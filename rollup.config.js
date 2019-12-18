@@ -1,14 +1,14 @@
 import babel from 'rollup-plugin-babel';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
-// import replace from 'rollup-plugin-replace';
+import replace from 'rollup-plugin-replace';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 // import json from 'rollup-plugin-json';
 
 const globals = {
   react: 'React',
   'react-dom': 'ReactDOM',
-  '@material-ui/core': '@material-ui/core'
+  // '@material-ui/core': '@material-ui/core'
 };
 
 const babelOptions = {
@@ -53,7 +53,7 @@ export default {
     resolve(),
     babel(babelOptions),
     commonjs(commonjsOptions),
-    // replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
+    replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
     // json(),
   ]
 };

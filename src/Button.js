@@ -1,14 +1,17 @@
 import React from 'react';
-import MButton from '@material-ui/core/Button';
+// import { Button as MaterialButton } from '@material-ui/core';
+import MaterialButton from '@material-ui/core/Button';
 
 function Button(props) {
   // return <MButton />;
   const { label, ...others } = props;
+  // const [state] = React.useState('label');
   return (
-    <MButton {...others}>
-      {label}
-    </MButton>
-  )
+    <MaterialButton {...others}>
+      {/* {state} */}
+      sdlkfj
+    </MaterialButton>
+  );
 }
 
 export default Button;
