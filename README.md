@@ -10,7 +10,7 @@ In the project directory, you can run:
 
 UI Component를 만들기 위한 local 환경.
 
-/example 하위의 소스가 실행됨
+/example 하위의 소스가 실행됨 ==> 변경
 
 ### `yarn test`
 
