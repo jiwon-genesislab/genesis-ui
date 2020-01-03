@@ -72,6 +72,7 @@ function Input(props) {
     className = '',
     classes: propClasses,
     autoFocus = false,
+    isControlled = false,
     inputType = 'text',
     width,
     height,
@@ -81,7 +82,7 @@ function Input(props) {
     labelStyle = {},
     inputProps = {},
     value: propValue,
-    postChange = () => {},
+    postChange = null,
     error = false,
     disabled = false,
     readonly = false,
@@ -119,13 +120,21 @@ function Input(props) {
   };
 
   React.useEffect(() => {
-    setStatus({
-      error,
-      disabled,
-      readonly
-    });
-    setValues(propValue);
-  }, [error, disabled, readonly, propValue]);
+    if (isControlled) {
+      setValues(propValue);
+      setStatus({
+        error,
+        disabled,
+        readonly
+      });
+    } else {
+      setStatus({
+        error,
+        disabled,
+        readonly
+      });
+    }    
+  }, [error, disabled, readonly, isControlled, propValue]);
 
   return (
     <FormControl
@@ -149,7 +158,7 @@ function Input(props) {
         disabled={status.disabled}
         inputProps={{ ...inputProps, className: status.readonly ? otherClasses.readOnly: '' }}
         placeholder={placeholder}
-        // defaultValue={value !== 0 && !isStringWithNotEmpty(value) ? '' : value}
+        //defaultValue={!isControlled && value}
         value={value}
         onChange={handleChange}
         {...others}
@@ -183,6 +192,9 @@ Input.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
+  isControlled: PropTypes.bool,
+  // false => uncontrolled component https://reactjs.org/docs/uncontrolled-components.html
+  // true => controlled component https://reactjs.org/docs/forms.html#controlled-components
   postChange: PropTypes.func,
   error: PropTypes.bool,
   helperText: PropTypes.string,

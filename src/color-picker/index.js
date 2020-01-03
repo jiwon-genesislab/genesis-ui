@@ -9,7 +9,7 @@ function rgbToHex(rgb) {
   const hex = parseInt(rgb, 10);
   if (isNaN(hex)) {
     return '00';
-  }
+  };
 
   const hexString = hex.toString(16);
   return hexString.length === 1 ? `0${hexString}` : hexString; 
@@ -28,11 +28,12 @@ function isRgbError(rgb) {
     return true;
   }
   return false;
-}
+};
 
 const useColorStyles = makeStyles(theme => {
   return {
     container: {
+      display: 'inline-block',
       boxSizing: 'border-box',
       width: 32,
       height: 32,
@@ -42,8 +43,17 @@ const useColorStyles = makeStyles(theme => {
   };
 });
 
+const useFormControlStyles = makeStyles(theme => {
+  return {
+    formControl: {
+      margin: 0
+    }
+  };
+});
+
 function ColorPicker(props) {
   const colorClasses = useColorStyles();
+  const formControlClasses = useFormControlStyles();
 
   const [color, setColor] = React.useState({
     value: '000000',
@@ -136,43 +146,68 @@ function ColorPicker(props) {
   };
 
   return (
-    <div>
-      <p className={colorClasses.container} style={{ backgroundColor: `#${color.value}` }}> </p>
-      <Input
-        label='HEX'
-        placeholder=''
-        inputProps={{ maxLength: 6 }}
-        value={color.value}
-        error={color.error}
-        helperText={color.error ? '유효한 값을 입력하세요.' : ''}
-        startAdornment={<InputAdornment position="start">#</InputAdornment>}
-        postChange={postChangeColor} />
-      <Input
-        label='R'
-        placeholder=''
-        inputProps={{ maxLength: 3 }}
-        error={colorR.error}
-        helperText={colorR.error ? '유효한 값을 입력하세요.' : ''}
-        value={colorR.value}
-        postChange={posChangeR} />
-      <Input
-        label='G'
-        placeholder=''
-        inputProps={{ maxLength: 3 }}
-        error={colorG.error}
-        helperText={colorG.error ? '유효한 값을 입력하세요.' : ''}
-        value={colorG.value}
-        postChange={posChangeG} />
-      <Input
-        label='B'
-        placeholder=''
-        inputProps={{ maxLength: 3 }}
-        error={colorB.error}
-        helperText={colorB.error ? '유효한 값을 입력하세요.' : ''}
-        value={colorB.value}
-        postChange={posChangeB} />
+    <div style={{ position: 'relative' }}>
+      <span
+        className={colorClasses.container}
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 32,
+          backgroundColor: `#${color.value}` }} />
+      <div style={{
+          position: 'absolute',
+          left: 48,
+          margin: 0
+          }}>
+        <Input
+          classes={formControlClasses}
+          style={{ marginRight: 32 }}
+          isControlled={true}
+          label='HEX'
+          placeholder=''
+          inputProps={{ maxLength: 6 }}
+          value={color.value}
+          error={color.error}
+          helperText={color.error ? '유효한 값을 입력하세요.' : ''}
+          startAdornment={<InputAdornment position="start">#</InputAdornment>}
+          postChange={postChangeColor} />
+        <Input
+          classes={formControlClasses}
+          isControlled={true}
+          style={{ marginRight: 16 }}
+          label='R'
+          placeholder=''
+          inputProps={{ maxLength: 3 }}
+          error={colorR.error}
+          helperText={colorR.error ? '유효한 값을 입력하세요.' : ''}
+          value={colorR.value}
+          postChange={posChangeR} />
+        <Input
+          classes={formControlClasses}
+          isControlled={true}
+          style={{ marginRight: 16 }}
+          label='G'
+          placeholder=''
+          inputProps={{ maxLength: 3 }}
+          error={colorG.error}
+          helperText={colorG.error ? '유효한 값을 입력하세요.' : ''}
+          value={colorG.value}
+          postChange={posChangeG} />
+        
+        <Input
+          classes={formControlClasses}
+          isControlled={true}
+          style={{ marginRight: 16 }}
+          label='B'
+          placeholder=''
+          inputProps={{ maxLength: 3 }}
+          error={colorB.error}
+          helperText={colorB.error ? '유효한 값을 입력하세요.' : ''}
+          value={colorB.value}
+          postChange={posChangeB} />
+      </div>
     </div>
   );
-}
+};
 
 export default ColorPicker;
