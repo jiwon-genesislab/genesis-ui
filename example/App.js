@@ -1,13 +1,25 @@
 import React from 'react';
+import { ThemeProvider } from '@material-ui/styles';
 
-import logo from './logo.svg';
+import createTheme from './theme';
+
 import './App.css';
-import { Button } from '../src';
-
-console.log(Button)
+import {
+  // Input,
+  // Button,
+  // Calendar,
+  ColorPicker
+} from '../src';
 
 function App() {
-  return <Button />
+  // return <Input />;
+  const theme = createTheme();
+  return (
+    <ThemeProvider theme={theme}>
+      <ColorPicker />
+    </ThemeProvider>
+  )  
+  // return <ColorPicker />;
   // return (
   //   <div className="App">
   //     <header className="App-header">
