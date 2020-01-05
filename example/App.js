@@ -7,8 +7,8 @@ import './App.css';
 import {
   // Input,
   // Button,
-  // Calendar,
-  ColorPicker
+  Calendar,
+  // ColorPicker
 } from '../src';
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
   const theme = createTheme();
   return (
     <ThemeProvider theme={theme}>
-      <ColorPicker />
+      <Calendar />
     </ThemeProvider>
   )  
   // return <ColorPicker />;
